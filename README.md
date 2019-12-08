@@ -8,10 +8,10 @@
 - Adegoke Saheed Oluwafemi, adegokeoluwafemi@gmail.com
    
 ## Proposed Solution
-A platform that allows users in critical crises or criminal activities to alert neighbours within a specified area to come at their rescue.
+A platform that allows users in critical crises or criminal activities to alert neighbours and suitable crime-force within a specified area to come at their rescue.
 
 ## Proposed Stack
-Flutter, dart, Firebase and Google Maps.
+Flutter, Dart, Firebase and Google Maps.
 
 ## Problem
 Inadequate methods of alerting people on live criminal activities in search for rescue.
@@ -19,11 +19,12 @@ Inadequate methods of alerting people on live criminal activities in search for 
 ## Benefit
 - To provide a suitable means of savaging criminal activities to provide safety for citizens.
 - To provide real-time location update on where a criminal activity is going on.
+- Ability to alert suitable force in relation to the crime taking place.
 - Reduce rate of criminal activities in neighbourhoods.
 - Provide a feel-of-relief for citizens when currently in a criminal situation.
 
 ## Downloading latest apk version to track changes
-- Google docs
+- Google drive
 
    
  
