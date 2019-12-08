@@ -5,8 +5,7 @@
 ### Team Members
 - Adebisi Habib Adetoba
    adetoba53@gmail.com
-- Olatunde Abdulrahaman O.
-   olatunde.abdulrahaman@gmail.com
+- Olatunde Abdulrahaman O. \nolatunde.abdulrahaman@gmail.com
 - Adegoke Saheed Oluwafemi
    adegokeoluwafemi@gmail.com
    
