@@ -3,7 +3,5 @@
 # Team Lit
 
 # Team Members
-	Adebisi Habib Adetoba
-  adetoba53@gmail.com
    
  
