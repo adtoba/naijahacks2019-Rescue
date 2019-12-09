@@ -6,6 +6,7 @@
 - Adebisi Habib Adetoba, adetoba53@gmail.com
 - Olatunde Abdulrahaman O. , olatunde.abdulrahaman@gmail.com
 - Adegoke Saheed Oluwafemi, adegokeoluwafemi@gmail.com
+- Ibiyemi Olusola, olusolaibiyemi15@gmail.com
    
 ## Proposed Solution
 A platform that allows users in critical crises or criminal activities to alert neighbours and suitable crime-force within a specified area to come at their rescue.
