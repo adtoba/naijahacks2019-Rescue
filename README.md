@@ -1,37 +1,13 @@
-# NaijaHacks Hackathon 2019
-
-## Team Lit
-
-### Team Members
-- Adebisi Habib Adetoba, adetoba53@gmail.com
-- Olatunde Abdulrahaman O. , olatunde.abdulrahaman@gmail.com
-- Adegoke Saheed Oluwafemi, adegokeoluwafemi@gmail.com
-- Ibiyemi Olusola, olusolaibiyemi15@gmail.com
-   
-## Proposed Solution
-A platform that allows users in critical crises or criminal activities to alert neighbours and suitable crime-force within a specified area to come at their rescue.
-
-## Proposed Stack
-Flutter, Dart, Firebase and Google Maps.
-
-## Problem
-Inadequate methods of alerting people on live criminal activities in search for rescue.
-
-## Benefit
-- To provide a suitable means of savaging criminal activities to provide safety for citizens.
-- To provide real-time location update on where a criminal activity is going on.
-- Ability to alert suitable force in relation to the crime taking place.
-- Reduce rate of criminal activities in neighbourhoods.
-- Provide a feel-of-relief for citizens when currently in a criminal situation.
-
-## Directory layout 
-> lib (Contains source code).
-> assets (Contains assets).
+# Mockup/Sketch/Prototype/UI/Wireframe
 
 
+## Home screen
+![alt text](https://user-images.githubusercontent.com/24235903/70450834-40cfe780-1a59-11ea-93c4-8d841d28431b.png)
 
-## Downloading latest apk version to track changes
-- Google drive
+## Splash screen
+![alt text](https://user-images.githubusercontent.com/24235903/70450897-5ba25c00-1a59-11ea-81ae-aac71aa05966.png)
 
+## Panic screen
+![alt text](https://user-images.githubusercontent.com/24235903/70450960-6fe65900-1a59-11ea-8de6-b34bbc251dab.png)
    
  
