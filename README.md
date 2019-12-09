@@ -25,6 +25,8 @@ Inadequate methods of alerting people on live criminal activities in search for 
 - Provide a feel-of-relief for citizens when currently in a criminal situation.
 
 ## Directory layout
+> lib (Contains source code). 
+> assets (Contains assets).
 
 
 ## Downloading latest apk version to track changes
