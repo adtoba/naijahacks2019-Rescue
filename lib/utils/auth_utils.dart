@@ -14,7 +14,7 @@ class FirebaseUtils {
   }
 
 
-  static Future<AuthResult> createUser(String name, String email, String password) async {
+  static Future<AuthResult> createUser(String email, String password) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     var result = await _auth.createUserWithEmailAndPassword(
       email: email,
