@@ -28,7 +28,10 @@ dependencies:
   permission_handler: ^4.0.0
   app_settings: 1.0.6+2
   rebloc: any
-  # shared_preferences: any
+  firebase_auth: ^0.15.0
+  cloud_firestore: ^0.13.0+1
+  firebase_core: ^0.4.2
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:

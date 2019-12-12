@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-# rescue
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
 # NaijaHacks Hackathon 2019
 
 ## Team Lit
@@ -41,6 +23,7 @@ Inadequate methods of alerting people on live criminal activities in search for 
 - Ability to alert suitable force in relation to the crime taking place.
 - Reduce rate of criminal activities in neighbourhoods.
 - Provide a feel-of-relief for citizens when currently in a criminal situation.
+- Ability to record voice or snap pictures when in the face of danger
 
 ## Directory layout 
 > lib (Contains source code).
@@ -53,4 +36,3 @@ Inadequate methods of alerting people on live criminal activities in search for 
 
    
  
->>>>>>> a14d225b99f9c2fb71a09b8705b78872576d7add
