@@ -18,6 +18,12 @@ class RegisterBloc extends SimpleBloc<AppState> {
       await FirebaseUtils.createUser(action.email, action.password)
         .then((response) {
           if(response.user.uid != null) {
+            Map<String, dynamic> userDetails = {
+              'userId' : response.user.uid,
+              'email' : response.user.email,
+              'name' : action.name
+            };
+            FirebaseUtils.postUser(userDetails, response.user.uid);
             setPreference(USER_ID, response.user.uid);
             dispatcher(RegisterSuccess());
           } else {
@@ -74,7 +80,7 @@ class RegisterBloc extends SimpleBloc<AppState> {
 
   @override
   FutureOr<Action> afterware(DispatchFunction dispatcher, AppState state, Action action) {
-   if(action is LoginSuccess) {
+   if(action is RegisterSuccess) {
 
    }
    return action;
