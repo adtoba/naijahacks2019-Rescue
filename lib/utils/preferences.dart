@@ -1,7 +1,5 @@
 import 'dart:ffi';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 Future<dynamic> getPreference(String key) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -12,8 +10,8 @@ Future<dynamic> getPreference(String key) async {
 
 
 Future<bool> setPreference(String key, dynamic value) async {
-  bool status;
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  bool status;
 
   if(value.runtimeType == bool) {
     status = await sharedPreferences.setBool(key, value);
@@ -31,7 +29,6 @@ Future<bool> setPreference(String key, dynamic value) async {
 
 Future<bool> clearPreferences() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
   bool status = await sharedPreferences.clear();
 
   return status;

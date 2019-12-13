@@ -4,9 +4,9 @@ import 'package:rescue/constants/preferences.dart';
 
 
 class FirebaseUtils {
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static Future<AuthResult> loginUser(String email, String password) async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<AuthResult> loginUser(String email, String password) async {
     var result = await _auth.signInWithEmailAndPassword(
       email: email,
       password: password
@@ -16,8 +16,7 @@ class FirebaseUtils {
   }
 
 
-  static Future<AuthResult> createUser(String email, String password) async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<AuthResult> createUser(String email, String password) async {
     var result = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password
@@ -26,7 +25,7 @@ class FirebaseUtils {
     return result;
   }
 
-  static Future<dynamic> postUser(Map<String, dynamic> userDetails, String userId) async {
+  Future<dynamic> postUser(Map<String, dynamic> userDetails, String userId) async {
     final databaseReference = FirebaseDatabase.instance.reference();
     var result = await databaseReference.child(USER_COLLECTION).child(userId).child('details').push()
       .set(userDetails);
@@ -34,7 +33,7 @@ class FirebaseUtils {
     return result;
   }
 
-  static Future<dynamic> postData(Map<String, dynamic> map, String userId, String path) async {
+  Future<dynamic> postData(Map<String, dynamic> map, String userId, String path) async {
     final databaseReference = FirebaseDatabase.instance.reference();
 
     var result = await databaseReference.child(USER_COLLECTION).child(userId).child(path)

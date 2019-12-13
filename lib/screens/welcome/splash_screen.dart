@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:rescue/welcome/get_started.dart';
+import 'package:rescue/screens/auth/login_view.dart';
+import 'package:rescue/screens/welcome/get_started.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 4), () {
             Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) {
-          return GetStarted();
+          return LoginScreen();
         }));
     });
     super.initState();
@@ -23,16 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double deviceWidth = size.width;
+
     return Scaffold(
       body: Container(
       color: Colors.white,
       child: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: <Widget>[
-            Icon(Icons.add_box, size: 40.0,),
-            SizedBox(height: 10.0,),
+            Image.asset("assets/images/LOGO.png", width: deviceWidth / 2, ),
+            SizedBox(width: 10.0,),
             Text(
               'RESCUE',
               style: TextStyle(

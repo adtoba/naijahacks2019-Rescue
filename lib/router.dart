@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:rescue/screens/auth/login_view.dart';
 import 'package:rescue/screens/home/home_view.dart';
-import 'package:rescue/welcome/get_started.dart';
-import 'package:rescue/welcome/splash_screen.dart';
+import 'package:rescue/screens/welcome/get_started.dart';
+import 'package:rescue/screens/welcome/splash_screen.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

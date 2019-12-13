@@ -5,8 +5,8 @@ import 'package:rescue/bloc/store.dart';
 import 'package:rescue/router.dart';
 import 'package:rescue/screens/auth/login_view.dart';
 import 'package:rescue/screens/home/home_view.dart';
-import 'package:rescue/welcome/get_started.dart';
-import 'package:rescue/welcome/splash_screen.dart';
+import 'package:rescue/screens/welcome/get_started.dart';
+import 'package:rescue/screens/welcome/splash_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'MuseoSans',
           primarySwatch: Colors.blue,
         ),
-        home: LoginScreen(),
+        home: SplashScreen(),
       ),
     );
   }

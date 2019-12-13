@@ -28,10 +28,12 @@ dependencies:
   permission_handler: ^4.0.0
   app_settings: 1.0.6+2
   rebloc: any
-  firebase_auth: ^0.15.0
-  firebase_core: ^0.4.2
-  shared_preferences: any
-  firebase_database: ^3.1.1
+  dynamic_theme: any
+  firebase_core: ^0.4.0+9
+  shared_preferences: ^0.5.3+4
+  firebase_auth: ^0.14.0+8
+  # cloud_firestore: ^0.12.10
+  firebase_database: ^3.0.9
 
 dev_dependencies:
   flutter_test:
