@@ -2,6 +2,13 @@ import 'package:meta/meta.dart';
 
 class User {
 
+  User(
+    this._email,
+    this._name,
+    this._userId
+    
+  );
+
   String _name;
   String _email;
   String _userId;

@@ -10,7 +10,6 @@ import 'package:rescue/bloc/states/register.dart';
 import 'package:rescue/constants/preferences.dart';
 import 'package:rescue/utils/auth_utils.dart';
 import 'package:rescue/utils/preferences.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 enum authProblems {
   UserNotFound,
@@ -37,14 +36,6 @@ class RegisterBloc extends SimpleBloc<AppState> {
               'email': response.user.email,
               'name': action.name
             };
-            // final databaseReference = FirebaseDatabase.instance.reference();
-            // await databaseReference
-            //     .child(USER_COLLECTION)
-            //     .child(response.user.uid)
-            //     .child(USER_DETAILS)
-            //     .push()
-            //     .set(userDetails);
-            // setPreference(USER_ID, response.user.uid);
             dispatcher(RegisterSuccess());
           } else {
             dispatcher(RegisterError(registerMessage: 'Registration failed'));

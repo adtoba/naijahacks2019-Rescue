@@ -11,7 +11,9 @@ Future<dynamic> getPreference(String key) async {
 
 Future<bool> setPreference(String key, dynamic value) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  print("USER ID TOKEN $value was stored");
   bool status;
+
 
   if(value.runtimeType == bool) {
     status = await sharedPreferences.setBool(key, value);

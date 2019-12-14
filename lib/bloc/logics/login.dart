@@ -5,6 +5,7 @@ import 'package:rescue/bloc/states/login.dart';
 import 'dart:async';
 import 'package:rescue/bloc/states/main.dart';
 import 'package:rescue/constants/preferences.dart';
+import 'package:rescue/models/user.dart';
 import 'package:rescue/utils/auth_utils.dart';
 import 'package:rescue/utils/preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,10 +29,20 @@ class LoginBloc extends SimpleBloc<AppState> {
                 email: action.email, password: action.password)
             .then((response) {
           if (response.user.uid != null) {
-            //  setPreference(IS_LOGGED_IN, true);
+             setPreference(IS_LOGGED_IN, true);
+             setPreference(USER_ID, response.user.uid);
+            Map<String, dynamic> detailsMap = {
+              "email": response.user.email,
+              "userId": response.user.uid,
+              "name": response.user.displayName
+            };
+
+            User user = User.fromMap(detailsMap);
+
             dispatcher(LoginSuccess());
-            print('Login successful: ${response.user.uid}');
-            print('Login successful: ${response.user.email}');
+            print('Login successful: ${user.userId}');
+            print('Login successful: ${user.email}');
+
           } else {
             dispatcher(LoginError(loginMessage: 'An error occured'));
           }
