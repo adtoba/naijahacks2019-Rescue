@@ -1,4 +1,6 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:rescue/bloc/actions/login.dart';
 import 'package:rescue/bloc/methods/status.dart';
@@ -14,12 +16,64 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+
 class _LoginScreenState extends State<LoginScreen> {
   RegExp regex = new RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoggingIn = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    locationPrompt();
+    super.initState();
+  }
+
+  void locationPrompt() async {
+    bool isLocationEnabled = await Geolocator().isLocationServiceEnabled();
+
+    if (!isLocationEnabled) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(
+                  "To continue, turn on device location (GPS), which uses your device location service."),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    splashColor: Colors.red,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("NO THANKS"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    splashColor: Colors.blue,
+                    onTap: () {
+                      AppSettings.openLocationSettings();
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("OK"),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          });
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

@@ -11,8 +11,8 @@ class SinglePanicItem extends StatelessWidget {
   String senderAddress;
   String senderEmail;
   String attackType;
-  String lat;
-  String long;
+  double lat;
+  double long;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SinglePanicItem extends StatelessWidget {
                 SizedBox(
                   height: 5.0,
                 ),
-                Text('LatLng: $lat, $long'),
+                Text('LatLng: ${lat.toString()}, ${long.toString()}'),
                 SizedBox(
                   height: 5.0,
                 ),

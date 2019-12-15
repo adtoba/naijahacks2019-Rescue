@@ -20,9 +20,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
   String userId;
   @override
   void initState() {
-    Timer(Duration(seconds: 2), () async {
-      userId = await getPreference(USER_ID);
-    });
     
     super.initState();
   }
@@ -36,9 +33,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text('$userId'),
-            // accountEmail: Text(_user.email != null ? _user.email : 'NaN'),
-            onDetailsPressed: () {},
+            // accountName: Text('$userId'),
+            // // accountEmail: Text(_user.email != null ? _user.email : 'NaN'),
+            // onDetailsPressed: () {},
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -46,7 +43,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               children: <Widget>[
                  ListTile(
                   leading: Icon(Icons.notifications_active),
-                  title: Text('Panics'),
+                 title: Text('Panics'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.of(context)

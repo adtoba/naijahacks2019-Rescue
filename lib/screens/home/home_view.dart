@@ -33,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
       timeInterval: 10, accuracy: LocationAccuracy.bestForNavigation);
   String _currentAddress;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final List<String> possibleAttacks = [
     'Robbery',
     'Kidnapping',
@@ -53,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
     permissionService.requestLocationPermission(onPermissionDenied: () {
       print("Permission has been denied");
     });
+    locationPrompt();
+
     super.initState();
   }
 
@@ -115,22 +119,22 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // _getAddressFromPosition() async {
-  //   try {
-  //     List<Placemark> p = await _geolocator.placemarkFromCoordinates(
-  //         position.latitude, position.longitude);
-  //     Placemark place = p[0];
+  _getAddressFromPosition() async {
+    try {
+      List<Placemark> p = await _geolocator.placemarkFromCoordinates(
+          position.latitude, position.longitude);
+      Placemark place = p[0];
 
-  //     setState(() {
-  //       _currentAddress =
-  //           "${place.isoCountryCode},${place.locality}, ${place.postalCode}, ${place.country}";
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+      setState(() {
+        _currentAddress =
+            "${place.isoCountryCode},${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
-   void getLocation() async {
+  void getLocation() async {
     bool isLocationEnabled = await Geolocator().isLocationServiceEnabled();
     if (isLocationEnabled) {
       await Geolocator()
@@ -158,18 +162,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    locationPrompt();
     locationUpdater(() {});
 
-     getLocation();
-    
+    getLocation();
+
+    _getAddressFromPosition();
+
     return Scaffold(
+      key: _scaffoldKey,
       drawer: HomeDrawer(),
       body: Stack(
         children: <Widget>[
           isLocationDerived
-              ? 
-              GoogleMap(
+              ? GoogleMap(
                   mapType: MapType.normal,
                   zoomGesturesEnabled: true,
                   indoorViewEnabled: true,
@@ -195,7 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(top: 40.0, left: 20.0),
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.menu, color: Colors.black),
+                  GestureDetector(
+                      onTap: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      child: Icon(Icons.menu, color: Colors.black)),
                   SizedBox(
                     width: 20.0,
                   ),
@@ -374,7 +383,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Map<String, dynamic> data = {
                                                   "senderAddress":
                                                       _currentAddress,
-                                                  "senderEmail": 'adetoba54@gmail.com',
+                                                  "senderEmail":
+                                                      'adetoba54@gmail.com',
                                                   "attackType": 'Robbery',
                                                   "lat": lat,
                                                   "long": long

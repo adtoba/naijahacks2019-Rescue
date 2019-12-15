@@ -51,8 +51,8 @@ class _PanicScreenState extends State<PanicScreen> {
                   senderAddress: panicsList[position].senderAddress,
                   senderEmail: panicsList[position].senderEmail,
                   attackType: panicsList[position].attackType,
-                  lat: panicsList[position].lat.toString(),
-                  long: panicsList[position].long.toString(),
+                  lat: panicsList[position].lat,
+                  long: panicsList[position].long,
                 );
               },
             );
