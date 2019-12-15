@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:app_settings/app_settings.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rescue/models/user.dart';
 
 import 'package:rescue/utils/permission_services.dart';
 import 'package:rescue/widgets/home_drawer.dart';
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String dropdownValue = 'All';
   Position position;
   bool isBuilt = false;
+  bool isSendingSignal = false;
   bool currentTrusteeValue = false;
   bool currentAuthorityValue = false;
   bool isLocationDerived = false;
@@ -28,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   StreamSubscription<Position> _positionStream;
   final LocationOptions _locationOptions = LocationOptions(
       timeInterval: 10, accuracy: LocationAccuracy.bestForNavigation);
+  String _currentAddress;
 
   final List<String> possibleAttacks = [
     'Robbery',
@@ -38,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
     'Harrassment',
     'Suspicious activity'
   ];
+
+  CollectionReference _ref;
+  final Firestore _db = Firestore.instance;
+  final String path = "Panics";
+  User user;
 
   @override
   void initState() {
@@ -106,7 +115,22 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void getLocation() async {
+  // _getAddressFromPosition() async {
+  //   try {
+  //     List<Placemark> p = await _geolocator.placemarkFromCoordinates(
+  //         position.latitude, position.longitude);
+  //     Placemark place = p[0];
+
+  //     setState(() {
+  //       _currentAddress =
+  //           "${place.isoCountryCode},${place.locality}, ${place.postalCode}, ${place.country}";
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+   void getLocation() async {
     bool isLocationEnabled = await Geolocator().isLocationServiceEnabled();
     if (isLocationEnabled) {
       await Geolocator()
@@ -137,14 +161,15 @@ class _HomeScreenState extends State<HomeScreen> {
     locationPrompt();
     locationUpdater(() {});
 
-    getLocation();
-
+     getLocation();
+    
     return Scaffold(
       drawer: HomeDrawer(),
       body: Stack(
         children: <Widget>[
           isLocationDerived
-              ? GoogleMap(
+              ? 
+              GoogleMap(
                   mapType: MapType.normal,
                   zoomGesturesEnabled: true,
                   indoorViewEnabled: true,
@@ -195,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (BuildContext context,
                               StateSetter setModalState) {
                             return Container(
-                              height: 220.0,
+                              height: 300.0,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0)),
                               child: Padding(
@@ -247,94 +272,149 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
 
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: possibleAttacks
-                                              .map((attacks) => SingleItem(
-                                                    content: attacks,
-                                                  ))
-                                              .toList(),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                    //   child: SingleChildScrollView(
+                                    //     scrollDirection: Axis.horizontal,
+                                    //     child: Row(
+                                    //       mainAxisAlignment:
+                                    //           MainAxisAlignment.spaceEvenly,
+                                    //       crossAxisAlignment:
+                                    //           CrossAxisAlignment.start,
+                                    //       children: possibleAttacks
+                                    //           .map((attacks) => SingleItem(
+                                    //                 content: attacks,
+                                    //               ))
+                                    //           .toList(),
+                                    //     ),
+                                    //   ),
+                                    // ),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        SingleItem(
+                                          isSelected: true,
+                                          content: 'Robbery',
                                         ),
-                                      ),
+                                        SingleItem(
+                                          content: 'Kidnapping',
+                                        ),
+                                        SingleItem(
+                                          content: 'Electric',
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        SingleItem(
+                                          content: 'Accident',
+                                        ),
+                                        SingleItem(
+                                          content: 'Abuse',
+                                        ),
+                                        SingleItem(
+                                          content: 'Harrassment',
+                                        ),
+                                      ],
                                     ),
 
-                                    // Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceEvenly,
-                                    //   children: <Widget>[
-                                    //     SingleItem(
-                                    //       content: 'Robbery',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       content: 'Kidnapping',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       content: 'Electric',
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                    // SizedBox(
-                                    //   height: 20.0,
-                                    // ),
-                                    // Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceEvenly,
-                                    //   children: <Widget>[
-                                    //     SingleItem(
-                                    //       content: 'Accident',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       color: Colors.orange,
-                                    //       content: 'Abuse',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       content: 'Harrassment',
-                                    //     ),
-                                    //   ],
-                                    // ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
 
-                                    //  SizedBox(
-                                    //   height: 20.0,
-                                    // ),
-
-                                    //  Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceEvenly,
-                                    //   children: <Widget>[
-                                    //     SingleItem(
-                                    //       content: 'Robbery',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       content: 'Kidnapping',
-                                    //     ),
-                                    //     SingleItem(
-                                    //       content: 'Electric',
-                                    //     ),
-                                    //   ],
-                                    // ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        SingleItem(
+                                          content: 'Robbery',
+                                        ),
+                                        SingleItem(
+                                          isSelected: true,
+                                          content: 'Kidnapping',
+                                        ),
+                                        SingleItem(
+                                          content: 'Electric',
+                                        ),
+                                      ],
+                                    ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                                      padding: const EdgeInsets.only(
+                                          bottom: 10.0, top: 10.0),
                                       child: Align(
                                         alignment: Alignment.bottomCenter,
-                                        child: Container(
-                                          width: 200.0,
-                                          height: 40.0,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              color: Colors.red),
-                                          child: Center(
-                                            child: Text('PROCEED',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            GestureDetector(
+                                              onTap: () async {
+                                                double lat;
+                                                double long;
+                                                if (position.latitude == null) {
+                                                  lat = 0.0;
+                                                } else {
+                                                  lat = position.latitude;
+                                                }
+
+                                                if (position.longitude ==
+                                                    null) {
+                                                  long = 0.0;
+                                                } else {
+                                                  long = position.longitude;
+                                                }
+
+                                                Map<String, dynamic> data = {
+                                                  "senderAddress":
+                                                      _currentAddress,
+                                                  "senderEmail": 'adetoba54@gmail.com',
+                                                  "attackType": 'Robbery',
+                                                  "lat": lat,
+                                                  "long": long
+                                                };
+
+                                                setModalState(() {
+                                                  isSendingSignal = true;
+                                                });
+
+                                                await addDocument(data)
+                                                    .then((response) {
+                                                  setModalState(() {
+                                                    isSendingSignal = false;
+                                                    Navigator.pop(context);
+                                                  });
+                                                });
+                                              },
+                                              child: Container(
+                                                width: 200.0,
+                                                height: 40.0,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    color: Colors.red),
+                                                child: Center(
+                                                  child: Text('PROCEED',
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5.0,
+                                            ),
+                                            Visibility(
+                                                visible: isSendingSignal,
+                                                child:
+                                                    CircularProgressIndicator())
+                                          ],
                                         ),
                                       ),
                                     )
@@ -402,5 +482,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Future<DocumentReference> addDocument(Map data) {
+    _ref = _db.collection(path);
+    return _ref.add(data);
   }
 }

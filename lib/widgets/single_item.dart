@@ -11,9 +11,9 @@ class SingleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100.0,
-      height: 50.0,
+      height: 40.0,
       child: Card(
-        color: isSelected ? color : Colors.blue,
+        color: isSelected ? Colors.orange : Colors.blue,
         elevation: 0.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0)

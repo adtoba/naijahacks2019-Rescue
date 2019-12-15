@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rebloc/rebloc.dart';
+import 'package:rescue/bloc/provider/viewmodels/panics_model.dart';
 import 'package:rescue/bloc/provider/viewmodels/trustee_model.dart';
 import 'package:rescue/bloc/states/main.dart';
 import 'package:rescue/bloc/store.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(builder: (_) => locator<TrusteeModel>(),),
+        ChangeNotifierProvider(builder: (_) => locator<PanicsModel>(),)
       ],
           child: StoreProvider<AppState>(
             store: appStore,

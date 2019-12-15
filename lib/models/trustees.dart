@@ -27,14 +27,12 @@ class Trustees {
   }
 
   Map<String, dynamic> toJson() {
-
     var jsonMap = Map<String, dynamic>();
 
     jsonMap['email'] = this._email;
     jsonMap['name'] = this._name;
     jsonMap['phoneNumber'] = this._phoneNumber;
     jsonMap['userId'] = this._docId;
-
 
     return jsonMap;
   }

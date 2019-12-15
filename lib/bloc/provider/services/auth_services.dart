@@ -6,6 +6,7 @@ class AuthService {
   
    final Firestore _db = Firestore.instance;
   final String path = "Trustees";
+  final String panics = "Panics";
   CollectionReference ref;
   FirebaseAuth _auth;
   FirebaseUser _user;
@@ -15,8 +16,15 @@ class AuthService {
     return ref.getDocuments();
   }
 
+  Stream<QuerySnapshot> streamPanicCollection() {
+    ref = _db.collection(panics);
+    return ref.snapshots();
+  }
+
   Stream<QuerySnapshot> streamDataCollection() {
     ref = _db.collection(path);
     return ref.snapshots();
   }
+
+  
 }

@@ -31,6 +31,8 @@ class LoginBloc extends SimpleBloc<AppState> {
           if (response.user.uid != null) {
              setPreference(IS_LOGGED_IN, true);
              setPreference(USER_ID, response.user.uid);
+             setPreference('email', response.user.email);
+             
             Map<String, dynamic> detailsMap = {
               "email": response.user.email,
               "userId": response.user.uid,
